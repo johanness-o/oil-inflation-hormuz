@@ -39,16 +39,15 @@ The full three-dataset merge (CPI + commodities + Hormuz) spans **Jan 2019 – J
 │   ├── raw/                  # Original, unmodified source datasets
 │   └── processed/            # Cleaned, monthly-frequency, merged outputs
 ├── notebooks/
-│   ├── 01_data_cleaning.ipynb
-│   ├── 02_initial_analysis.ipynb
-│   ├── 03_final_analysis.ipynb
-│   └── 04_ml_predictive.ipynb   # Extra: predictive modeling
+│   ├── notebook1_commodity_prices.ipynb       # Clean commodity (WTI/Brent/gas) data
+│   ├── notebook2_cpi_inflation.ipynb          # Clean CPI / inflation data
+│   ├── notebook3_hormuz_arrivals.ipynb        # Clean Hormuz tanker traffic data
+│   ├── INST447_ComparativeAnalysisNotebook.ipynb  # Merge + final analysis & figures
+│   └── notebook5_ml.ipynb                     # Extra: predictive modeling
 ├── figures/                  # Exported visualizations
 ├── README.md
 └── requirements.txt
 ```
-
-*(Adjust the names above to match your actual files.)*
 
 ---
 
@@ -81,12 +80,13 @@ The Kaggle and IMF datasets are not redistributed here if licensing requires dir
 
 | Step | Notebook | What it does |
 |---|---|---|
-| 1 | `01_data_cleaning.ipynb` | Converts daily commodity and Hormuz data to monthly frequency, standardizes date formats across three differently structured CSVs, and aligns everything to a shared **month-end join key**. Outputs to `data/processed/`. |
-| 2 | `02_initial_analysis.ipynb` | First-pass exploration of the merged data. |
-| 3 | `03_final_analysis.ipynb` | Produces the final figures: inflation vs. WTI over time, the Pearson correlation heatmap, the rolling 6-month tanker–WTI correlation, and the event-marked WTI + tanker chart. |
-| 4 | `04_ml_predictive.ipynb` | *(Optional / extra)* Predictive modeling beyond the core correlational analysis. |
+| 1 | `notebook1_commodity_prices.ipynb` | Cleans the commodity price data (WTI, Brent, natural gas): converts daily data to monthly frequency and standardizes dates to a month-end key. Outputs to `data/processed/`. |
+| 2 | `notebook2_cpi_inflation.ipynb` | Cleans the CPI/inflation data and computes month-over-month (MoM) inflation. Outputs to `data/processed/`. |
+| 3 | `notebook3_hormuz_arrivals.ipynb` | Cleans the Strait of Hormuz tanker traffic data: converts daily arrivals to monthly frequency aligned to the same month-end join key. Outputs to `data/processed/`. |
+| 4 | `INST447_ComparativeAnalysisNotebook.ipynb` | Merges all three cleaned datasets, runs the comparative analysis, and produces the final figures: inflation vs. WTI over time, the Pearson correlation heatmap, the rolling 6-month tanker–WTI correlation, and the event-marked WTI + tanker chart. |
+| 5 | `notebook5_ml.ipynb` | *(Optional / extra)* Predictive modeling beyond the core correlational analysis. |
 
-**Run order matters:** notebooks 2–4 depend on the cleaned outputs from notebook 1.
+**Run order matters:** the three cleaning notebooks (1–3) must run before the comparative analysis (4), which depends on their cleaned outputs in `data/processed/`.
 
 ---
 
